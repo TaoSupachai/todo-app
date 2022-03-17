@@ -1,0 +1,52 @@
+@import "./_mixins.scss";
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --primary: #e07c7c;
+  --primaryPurple: #585292;
+  --black-1: #646681;
+  --black-2: #585858;
+  --bg-1: #d1d0d9;
+  --bg-2: #ecedf6;
+  --bg-3: #cccdde;
+  --gray-1: #eee;
+  --gray-2: #dedfe1;
+  --black: black;
+  --white: white;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-1);
+}
+* {
+  font-family: "Roboto", sans-serif;
+}
+.container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 1200px;
+  padding: 10rem;
+  padding-top: 60px;
+  margin-top: 300px;
+  margin: 42px auto;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 5rem;
+  }
+}

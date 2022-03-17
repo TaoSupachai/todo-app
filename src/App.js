@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import AppContent from './components/AppContent';
+import AppHeader from './components/AppHeader';
+import TodoProgress from './components/TodoProgress'
+import API from './config/API'
 
 function App() {
+  useEffect(() => {
+    API.get('todos').then(response => {
+      console.log(response.data);
+    }).catch(error => {
+      console.error('Error: ', error);
+    });
+
+  }, [])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <TodoProgress/>
+      <AppHeader/>
+      <AppContent/>
     </div>
   );
 }
