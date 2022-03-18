@@ -15,7 +15,7 @@ const boxVariants = {
     background: 'var(--primaryPurple)',
     transition: { duration: 0.1 },
   },
-  unchecked: { background: 'var(--gray-2)', transition: { duration: 0.1 } },
+  unchecked: { background: 'var(--white)', transition: { duration: 0.1 } },
 };
 
 function CheckButton({ checked, handleCheck }) {

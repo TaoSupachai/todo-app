@@ -21,12 +21,9 @@ function TodoAdd() {
 
   useEffect(() => {
     title && title !== "" && setShowAdd(true);
+    title === '' && setShowAdd(false);
   }, [title]);
 
-  // const handleCheck = () => {
-  //   setChecked(!checked);
-  //   dispatch(updateTodo({ ...todo, completed: checked ? false : true }));
-  // };
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -38,22 +35,33 @@ function TodoAdd() {
           completed: false
         })
       );
+      setTitle("")
     }
-
-    // toast.success('Todo Deleted Successfully');
   };
-
-  // const handleUpdate = () => {
-  //   // setUpdateModalOpen(true);
-  // };
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      if (title && title !== "") {
+        dispatch(
+          addTodo({
+            id: uuid(),
+            title: title,
+            completed: false
+          })
+        );
+        setTitle("")
+      }
+    }
+  }
   return (
     <>
       <motion.div className={styles.item} variants={child}>
         <input
           type="text"
           placeholder="Add your todo..."
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
-        ></input>
+          onKeyDown={handleKeyDown}
+        />
 
         <div className={styles.todoActions}>
           {showAdd && (
@@ -63,6 +71,7 @@ function TodoAdd() {
               onKeyDown={(e) => handleAdd(e)}
               tabIndex={0}
               role="button"
+              
             >
               <FiPlus />
             </div>
