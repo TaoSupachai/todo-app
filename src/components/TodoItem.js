@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import styles from '../styles/modules/todoItem.module.scss';
 import CheckButton from './CheckButton';
 import { getClasses } from '../utils/getClasses';
+import { useDispatch } from 'react-redux';
+import { deleteTodo, updateTodo } from '../slices/todoSlice';
 
 const child = {
     hidden: { y: 20, opacity: 0 },
@@ -13,18 +15,19 @@ const child = {
     },
   };
 
-function TodoItem() {
-    const [checked, setChecked] = useState(false);
+function TodoItem({todo}) {
+  const dispatch = useDispatch();
+    const [checked, setChecked] = useState(todo.completed);
 
     const handleCheck = () => {
         setChecked(!checked);
-        // dispatch(
-        //   updateTodo({ ...todo, status: checked ? 'incomplete' : 'complete' })
-        // );
+        dispatch(
+          updateTodo({ ...todo, completed: checked ? false : true })
+        );
       };
     
       const handleDelete = () => {
-        // dispatch(deleteTodo(todo.id));
+        dispatch(deleteTodo(todo.id));
         // toast.success('Todo Deleted Successfully');
       };
     
@@ -43,7 +46,7 @@ function TodoItem() {
                 checked === true && styles['todoText--completed'],
               ])}
             >
-              {/* {todo.title} */}test
+              {todo.title}
             </p>
           </div>
         </div>
@@ -59,8 +62,8 @@ function TodoItem() {
           </div>
           <div
             className={styles.icon}
-            onClick={() => handleUpdate()}
-            onKeyDown={() => handleUpdate()}
+            onClick={(e) => handleUpdate(e)}
+            onKeyDown={(e) => handleUpdate(e)}
             tabIndex={0}
             role="button"
           >

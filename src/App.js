@@ -1,24 +1,21 @@
-import React, { useEffect } from 'react';
-import AppContent from './components/AppContent';
-import AppHeader from './components/AppHeader';
-import TodoProgress from './components/TodoProgress'
-import API from './config/API'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import AppContent from "./components/AppContent";
+import AppHeader from "./components/AppHeader";
+import TodoProgress from "./components/TodoProgress";
+import {getTodoAsync} from './slices/todoSlice'
 
 function App() {
+  const dispatch = useDispatch();
   useEffect(() => {
-    API.get('todos').then(response => {
-      console.log(response.data);
-    }).catch(error => {
-      console.error('Error: ', error);
-    });
+    dispatch(getTodoAsync())
+  }, []);
 
-  }, [])
-  
   return (
     <div className="container">
-      <TodoProgress/>
-      <AppHeader/>
-      <AppContent/>
+      <TodoProgress />
+      <AppHeader />
+      <AppContent />
     </div>
   );
 }
